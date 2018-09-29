@@ -10917,6 +10917,7 @@ var creatureConditions = new Array(
 	["nongreen","pre"],
 	["artifact","pre"],
 	["nonartifact","pre"],
+	["historic","pre"],
 	["scarred","pre"],
 	["with first strike","post"],
 	["with flying","post"],
@@ -11024,6 +11025,7 @@ var highStuff = new Array(
 "Shadow",
 "Hexproof",
 "Bushido 2",
+"Afflict 2",
 "Infect",
 "Undying",
 "Void",
@@ -11045,7 +11047,7 @@ var creatureKeywordsCommon = new Array(
 "Unleash",
 "Menace",
 "Prowess",
-//"Common Transform",
+"Common Transform",
 "Spirit & Soulshift: CMC -1",
 "Invert",
 "Renown",
@@ -11068,6 +11070,7 @@ var creatureKeywordsUncommon = new Array(
 "Exalted",
 "Tap mana",
 "Evolve",
+"Mentor",
 "Changeling",
 "Shroud",
 "Graft 1",
@@ -11081,14 +11084,16 @@ var creatureKeywordsUncommon = new Array(
 "Basic landcycling",
 "Dethrone",
 "Dash",
-"Fabricate"
-//"Uncommon Transform"
+"Fabricate",
+"Embalm",
+"Uncommon Transform"
 );
 var creatureKeywordsRare = new Array(
 "Double Strike",
 "Shadow",
 "Hexproof",
 "Bushido",
+"Afflict",
 "Convoke",
 "Transmute",
 "Split second",
@@ -11105,8 +11110,10 @@ var creatureKeywordsRare = new Array(
 "Recover",
 "Battle Cry",
 "Outlast",
-"Megamorph"
-//"Rare Transform"
+"Megamorph",
+"Improvise",
+"Eternalize",
+"Rare Transform"
 );
 
 var creatureTriggersCommon = new Array(
@@ -11130,13 +11137,16 @@ var creatureTriggersUncommon = new Array(
 "Dealt damage",
 "Attacks",
 "Landfall",
-"Enchantment + Constellation"
+"Enchantment + Constellation",
+"Revolt",
+"Exert on Attack"
 );
 var creatureTriggersRare = new Array(
 "Exalted + Creature you control attacks alone",
 "Battalion",
 "Heroic",
 "Raid",
+"Enrage",
 "Upkeep",
 "Creature arrival",
 "Type cast",
@@ -11244,6 +11254,7 @@ var noncreatureLowTriggers = new Array(
 "Target invert until EoT",
 "Loot",
 "Spawn",
+"Treasure",
 "Investigate"
 );
 
@@ -11315,7 +11326,7 @@ var creatureMythicScars = new Array("Indestructible",
 "Annihilator",
 "Miracle",
 "Soulbond"
-//"Mythic Transform"
+"Mythic Transform"
 )
 
 var enchantCreaturePostiveCommon = new Array(
@@ -11558,7 +11569,7 @@ var nonCreatureCommonScars = new Array("Arrival",
 "Sac Effect",
 "Gain Life Trigger",
 "Activated Ability Common",
-//"Common Noncreature Transform",
+"Common Noncreature Transform",
 "Exploit",
 "Animate",
 "Surge"
@@ -11580,11 +11591,13 @@ var nonCreatureUncommonScars = new Array(
 "Cycling + Cycle Trigger",
 "Morph + Morph Trigger",
 "Activated Ability Uncommon",
-//"Uncommon Noncreature Transform",
+"Uncommon Noncreature Transform",
+"Revolt",
 "Animate"
 );
 var nonCreatureRareScars = new Array(
 "Convoke",
+"Improvise",
 "Transmute",
 "Split second",
 "Delve",
@@ -11597,7 +11610,7 @@ var nonCreatureRareScars = new Array(
 "Raid",
 "Exalted + Creature you control attacks alone",
 "Activated Ability Rare"
-//"Rare Noncreature Transform"
+"Rare Noncreature Transform"
 );
 var nonCreatureMythicScars = new Array("Indestructible",
 "Dredge",
@@ -11606,7 +11619,7 @@ var nonCreatureMythicScars = new Array("Indestructible",
 "Miracle",
 "Creatures gain",
 "Free Untap"
-//"Mythic Noncreature Transform"
+"Mythic Noncreature Transform"
 );
 
 var spellCommonScars = new Array(
@@ -11657,6 +11670,7 @@ var spellMythicScars = new Array("Storm",
 "Miracle",
 "Overload",
 "Fuse",
+"Aftermath",
 "Conspire",
 "Wrath",
 "Life set",
@@ -11709,12 +11723,14 @@ var lifeCommon = new Array(
 
 var makingCommon = new Array(
 "Spawn",
+"Treasure",
 "Manifest the top card of your library."
 );
 
 var spellUncommon = new Array(
 "Changeling",
 "Delve",
+"Jump-Start",
 "Surge Bonus"
 );
 
@@ -11757,6 +11773,7 @@ var spellRare  = new Array(
 "Buyback",
 "Replicate",
 "Convoke",
+"Improvise",
 "Split Second",
 "Cipher",
 "Recover",
@@ -12345,6 +12362,15 @@ if (ability == "Bushido") {
 			  ability = "Bushido 1"
 		   } else {
 			ability = "Bushido ".concat((d6).toString());
+		   }
+
+}
+if (ability == "Afflict") {
+	   var d3 = Math.floor((Math.random()*3));
+		  if (d6==0) {
+			  ability = "Afflict 1"
+		   } else {
+			ability = "Afflict ".concat((d3).toString());
 		   }
 
 }
@@ -13097,9 +13123,12 @@ function scar()
 
 	if (rollType == "OL") {
 	  if (scar.innerHTML == "Surge" ||
+	      scar.innerHTML == "Embalm" ||
+	      scar.innerHTML == "Eternalize" ||
 	      scar.innerHTML == "Mana cost reduction" ||
 	      scar.innerHTML == "Flash" ||
 	      scar.innerHTML == "Convoke" ||
+	      scar.innerHTML == "Improvise" ||
 	      scar.innerHTML == "Split second" ||
 	      scar.innerHTML == "Delve" ||
 	      scar.innerHTML == "Madness" ||
@@ -13355,6 +13384,21 @@ function scar()
 	{
 	   var d2 = Math.floor((Math.random()*2)+1);
 	   lowTrigger = "spawn ".concat((d2 ).toString()).concat(".");
+
+	}
+	  
+	//Treasure
+	if (mediumTrigger== "Treasure")
+	{
+	   var d3 = Math.floor((Math.random()*3)+1);
+	   mediumTrigger = "Create ".concat((d3).toString()).concat(" Treasure tokens with \"T, Sac: Add 1 mana of any color\".");
+
+	}
+	//Treasure
+	if (lowTrigger== "Treasure")
+	{
+	   var d2 = Math.floor((Math.random()*2)+1);
+	   lowTrigger = "Create ".concat((d2 ).toString()).concat(" Treasure tokens with \"T, Sac: Add 1 mana of any color\".");
 
 	}
 	//Destroy Artifact
@@ -14059,6 +14103,16 @@ function scar()
 	   var d3 = Math.floor((Math.random()*3)+1);
 	   scar.innerHTML = "Surge: mana cost -".concat(d3.toString());
 	}
+	if (scar.innerHTML == "Embalm")
+	{
+	   var d3 = Math.floor((Math.random()*3)+1);
+	   scar.innerHTML = "Embalm: mana cost +".concat(d3.toString());
+	}
+	if (scar.innerHTML == "Eternalize")
+	{
+	   var d3 = Math.floor((Math.random()*3)+1);
+	   scar.innerHTML = "Eternalize: mana cost +".concat(d3.toString() + 1);
+	}
 	if (scar.innerHTML == "Flashback")
 	{
 	   var d6 = Math.floor((Math.random()*6)+1);
@@ -14132,6 +14186,16 @@ function scar()
 			  scar.innerHTML = "Bushido 1"
 		   } else {
 			scar.innerHTML = "Bushido ".concat((d6).toString());
+		   }
+
+	}
+	if (scar.innerHTML == "Afflict")
+	{
+	   var d3 = Math.floor((Math.random()*3));
+		  if (d3==0) {
+			  scar.innerHTML = "Afflict 1"
+		   } else {
+			scar.innerHTML = "Afflict ".concat((d3).toString());
 		   }
 
 	}
@@ -14989,6 +15053,66 @@ function scar()
 			ReRoll = "Y";
 		 }
 	   }
+		
+	//Enrage
+	if (scar.innerHTML == "Enrage")
+	{
+	   var triggerLevel = Math.floor((Math.random()*100)+1);
+	   if (triggerLevel > 90)
+	   {
+		type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
+		 scar.innerHTML = "Enrage,  ".concat(highTrigger);
+	   } else if (triggerLevel > 45) {
+		type.innerHTML = type.innerHTML.concat(" With a medium powered trigger!")
+		 scar.innerHTML = "Enrage,  ".concat(mediumTrigger);
+	   } else {
+		 type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
+		 scar.innerHTML = "Enrage, ".concat(lowTrigger);
+		 if (lowTriggerLabel == "Self +X/+X until EoT" || lowTriggerLabel == "Self gains" || lowTriggerLabel ==  "Target +X/+X until EoT" || lowTriggerLabel ==  "Target ability until EoT")
+		 {
+			ReRoll = "Y";
+		 }
+	   }
+	
+	//Revolt
+	if (scar.innerHTML == "Revolt")
+	{
+	   var triggerLevel = Math.floor((Math.random()*100)+1);
+	   if (triggerLevel > 90)
+	   {
+		type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
+		 scar.innerHTML = "Revolt,  ".concat(highTrigger);
+	   } else if (triggerLevel > 45) {
+		type.innerHTML = type.innerHTML.concat(" With a medium powered trigger!")
+		 scar.innerHTML = "Revolt,  ".concat(mediumTrigger);
+	   } else {
+		 type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
+		 scar.innerHTML = "Revolt, ".concat(lowTrigger);
+		 if (lowTriggerLabel == "Self +X/+X until EoT" || lowTriggerLabel == "Self gains" || lowTriggerLabel ==  "Target +X/+X until EoT" || lowTriggerLabel ==  "Target ability until EoT")
+		 {
+			ReRoll = "Y";
+		 }
+	   }
+		
+	//Exert on Attack
+	if (scar.innerHTML == "Exert on Attack")
+	{
+	   var triggerLevel = Math.floor((Math.random()*100)+1);
+	   if (triggerLevel > 90)
+	   {
+		type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
+		 scar.innerHTML = "May Exert on attack,  ".concat(highTrigger);
+	   } else if (triggerLevel > 45) {
+		type.innerHTML = type.innerHTML.concat(" With a medium powered trigger!")
+		 scar.innerHTML = "May Exert on attack,  ".concat(mediumTrigger);
+	   } else {
+		 type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
+		 scar.innerHTML = "May Exert on attack, ".concat(lowTrigger);
+		 if (lowTriggerLabel ==  "Target +X/+X until EoT" || lowTriggerLabel ==  "Target ability until EoT")
+		 {
+			ReRoll = "Y";
+		 }
+	   }
 
 	}
 	//Spirit or Arcane cast
@@ -15322,6 +15446,24 @@ function scar()
 		   scar.innerHTML = "Bolster 2.";
 	   } else {
 		 scar.innerHTML= "Bolster 1.";
+	   }
+	}
+	//Hexproof
+	if (scar.innerHTML == "Hexproof")
+	{
+	   var d6 = Math.floor((Math.random()*6)+1);
+	   if (d6==6) {
+		   scar.innerHTML = "Hexproof.";
+	   } else if (d6==5) {
+		 scar.innerHTML= "Hexproof from White.";
+	   }else if (d6==4) {
+		 scar.innerHTML= "Hexproof from Blue.";
+	   }else if (d6==3) {
+		 scar.innerHTML= "Hexproof from Black.";
+	   }else if (d6==2) {
+		 scar.innerHTML= "Hexproof from Red.";
+	   }else if (d6==1) {
+		 scar.innerHTML= "Hexproof from Green.";
 	   }
 	}
 	//Support
