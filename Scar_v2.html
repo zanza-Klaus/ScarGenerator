@@ -12659,7 +12659,7 @@ function scar()
   while(ReRoll == "Y")
   {
     ReRoll = "N";
-
+  }
 	var test=document.getElementById("demo");
 	var type = document.getElementById("type");
 	var scar = document.getElementById("scar");
@@ -15062,17 +15062,21 @@ function scar()
 	   {
 		type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
 		 scar.innerHTML = "Enrage,  ".concat(highTrigger);
-	   } else if (triggerLevel > 45) {
-		type.innerHTML = type.innerHTML.concat(" With a medium powered trigger!")
+     } 
+     else if (triggerLevel > 45) 
+     {
+      type.innerHTML = type.innerHTML.concat(" With a medium powered trigger!")
 		 scar.innerHTML = "Enrage,  ".concat(mediumTrigger);
-	   } else {
+     } 
+     else {
 		 type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
 		 scar.innerHTML = "Enrage, ".concat(lowTrigger);
 		 if (lowTriggerLabel == "Self +X/+X until EoT" || lowTriggerLabel == "Self gains" || lowTriggerLabel ==  "Target +X/+X until EoT" || lowTriggerLabel ==  "Target ability until EoT")
 		 {
 			ReRoll = "Y";
 		 }
-	   }
+     }
+    }
 	
 	//Revolt
 	if (scar.innerHTML == "Revolt")
@@ -15092,7 +15096,8 @@ function scar()
 		 {
 			ReRoll = "Y";
 		 }
-	   }
+     }
+    }
 		
 	//Exert on Attack
 	if (scar.innerHTML == "Exert on Attack")
@@ -15541,7 +15546,7 @@ function scar()
        scarlink.innerHTML= "Click this link to see what you will transform into!";
        scarlink.href = linktext;
        scarlink.target = "_blank";
-;
+       ;
 	}
 
 	//Uncommon Transform
@@ -16255,9 +16260,6 @@ function scar()
 	}
  }
 
-}
-  }
-  }
 }
 </script>
 
