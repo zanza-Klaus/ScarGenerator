@@ -15491,6 +15491,37 @@ function scar()
 
 	}
 
+  //Fuse
+  if (scar.innerHTML == "Fuse")
+  {
+    var d4 = Math.floor((Math.random()*6)+1);
+    if (d4 == 4)
+      var creatureId = Math.floor((Math.random()*mythicNoncreatureIds.length)+1);
+    else
+      var creatureId = Math.floor((Math.random()*rareNoncreatureIds.length)+1);
+
+    var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(commonCreatureIds[creatureId]).concat("&type=card");
+    scar.innerHTML = "Fuse with X";
+       scarlink.innerHTML= "Click this link to see what you will transform into!";
+       scarlink.href = linktext;
+       scarlink.target = "_blank";
+  }
+
+  //Aftermath
+  if (scar.innerHTML == "Aftermath")
+  {
+    var d4 = Math.floor((Math.random()*6)+1);
+    if (d4 == 4)
+      var creatureId = Math.floor((Math.random()*mythicNoncreatureIds.length)+1);
+    else
+      var creatureId = Math.floor((Math.random()*rareNoncreatureIds.length)+1);
+
+    var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(commonCreatureIds[creatureId]).concat("&type=card");
+    scar.innerHTML = "Aftermath with X";
+       scarlink.innerHTML= "Click this link to see what you will transform into!";
+       scarlink.href = linktext;
+       scarlink.target = "_blank";
+  }
 
 	//Common Transform
 	if (scar.innerHTML == "Common Transform")
