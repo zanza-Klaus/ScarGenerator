@@ -14149,7 +14149,7 @@ function scar()
 	if (scar.innerHTML == "Surge")
 	{
 	   var d3 = Math.floor((Math.random()*3)+1);
-	   scar.innerHTML = "Surge: mana cost -".concat(d3.toString());
+	   scar.innerHTML = "Surge: mana cost -".concat(d3);
 	}
 	if (scar.innerHTML == "Embalm")
 	{
@@ -14158,8 +14158,8 @@ function scar()
 	}
 	if (scar.innerHTML == "Eternalize")
 	{
-	   var d3 = Math.floor((Math.random()*3)+1);
-	   scar.innerHTML = "Eternalize: mana cost +".concat(d3.toString() + 1);
+	   var d3 = Math.floor((Math.random()*3)+2);
+	   scar.innerHTML = "Eternalize: mana cost +".concat(d3.toString());
 	}
 	if (scar.innerHTML == "Flashback")
 	{
