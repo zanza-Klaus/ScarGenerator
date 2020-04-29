@@ -15496,7 +15496,8 @@ function scar()
   //Fuse
   if (scar.innerHTML == "Fuse")
   {
-    var d4 = Math.floor((Math.random()*6)+1);
+    scar.innerHTML = "Fuse with X";
+    var d4 = Math.floor((Math.random()*4)+1);
     if (d4 == 4)
     {
       var creatureId = Math.floor((Math.random()*mythicNoncreatureIds.length)+1);
