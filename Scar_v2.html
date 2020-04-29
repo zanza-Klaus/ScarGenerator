@@ -15496,11 +15496,17 @@ function scar()
   {
     var d4 = Math.floor((Math.random()*6)+1);
     if (d4 == 4)
+    {
       var creatureId = Math.floor((Math.random()*mythicNoncreatureIds.length)+1);
+      var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(mythicNoncreatureIds[creatureId]).concat("&type=card");
+    }
     else
+    {
       var creatureId = Math.floor((Math.random()*rareNoncreatureIds.length)+1);
+      var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(rareNoncreatureIds[creatureId]).concat("&type=card");
+    }
 
-    var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(commonCreatureIds[creatureId]).concat("&type=card");
+    
     scar.innerHTML = "Fuse with X";
        scarlink.innerHTML= "Click this link to see what you it's fused with!";
        scarlink.href = linktext;
@@ -15512,11 +15518,16 @@ function scar()
   {
     var d4 = Math.floor((Math.random()*6)+1);
     if (d4 == 4)
+    {
       var creatureId = Math.floor((Math.random()*mythicNoncreatureIds.length)+1);
+      var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(mythicNoncreatureIds[creatureId]).concat("&type=card");
+    }
     else
+    {
       var creatureId = Math.floor((Math.random()*rareNoncreatureIds.length)+1);
+      var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(rareNoncreatureIds[creatureId]).concat("&type=card");
+    }
 
-    var linktext = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=".concat(commonCreatureIds[creatureId]).concat("&type=card");
     scar.innerHTML = "Aftermath with X";
        scarlink.innerHTML= "Click this link to see what you will transform into!";
        scarlink.href = linktext;
