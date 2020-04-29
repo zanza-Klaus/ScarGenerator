@@ -10958,7 +10958,17 @@ var creatureActivatedAbilities = new Array(
 	["Invert this creature until end of turn",2,2,10,0, "This creature gains tough until end of turn"],
 	["Untap target land",2,2,90,2, "Untap target land, tap target land"],
 	["Regenerate this creature",3,5,20,0, "This creature gains indestructable until end of turn"],
-	["+1/+1 until end of turn",2,3,10,0, "+1/+1 counter on this"],
+  ["+1/+1 until end of turn",2,3,10,0, "+1/+1 counter on this"],
+  ["flying until end of turn",2,3,10,0, "flying counter on this"],
+  ["trample until end of turn",2,3,10,0, "trample counter on this"],
+  ["menace until end of turn",2,3,10,0, "menace counter on this"],
+  ["first strike until end of turn",2,3,10,0, "first strike counter on this"],
+  ["hexproof until end of turn",2,3,10,0, "hexproof counter on this"],
+  ["lifelink until end of turn",2,3,10,0, "lifelink counter on this"],
+  ["reach until end of turn",2,3,10,0, "reach counter on this"],
+  ["deathtouch until end of turn",2,3,10,0, "deathtouch counter on this"],
+  ["vigilance until end of turn",2,3,10,0, "vigilance counter on this"],
+  ["double strike until end of turn",2,3,10,0, "double strike counter on this"],
 	["Gain 1 life",2,4,75,2, "Gain 2 life"],
 	["Target player discards a card",2,4,50,90, "Target player discards a card at random"],
 	["Tap target artifact",3,5,75,2, "Untap target artifact, tap target artifact"],
@@ -11086,6 +11096,9 @@ var creatureKeywordsUncommon = new Array(
 "Dash",
 "Fabricate",
 "Embalm",
+"Riot",
+"Adapt",
+"Afterlife 1",
 "Uncommon Transform"
 );
 var creatureKeywordsRare = new Array(
@@ -11113,6 +11126,11 @@ var creatureKeywordsRare = new Array(
 "Megamorph",
 "Improvise",
 "Eternalize",
+"Afterlife",
+"Spectacle",
+"Adventure",
+"Escape",
+"Mutate",
 "Rare Transform"
 );
 
@@ -11211,6 +11229,7 @@ var creatureMediumTriggers = new Array(
 "Everyone sacs",
 "Bounce",
 "Self +1/+1 counter",
+"put a reach counter on this",
 "Target -1/-1 counter",
 "Target -X/-X until EoT",
 "All creatures +X/+X until EoT",
@@ -11226,6 +11245,7 @@ var creatureMediumTriggers = new Array(
 "Look at top Reveal Type",
 "Bolster",
 "Support",
+"Amass 1",
 "Activated Ability Uncommon"
 );
 
@@ -11239,6 +11259,13 @@ var creatureHighTriggers = new Array(
 "Player sac",
 "Banish",
 "manifest the top card of your library.",
+"put a flying counter on this",
+"put a deathtouch counter on this",
+"put a menace counter on this",
+"put a lifelink counter on this",
+"put a hexproof counter on this",
+"put a trample counter on this",
+"put a vigilance counter on this",
 "Activated Ability Rare"
 );
 
@@ -11255,6 +11282,7 @@ var noncreatureLowTriggers = new Array(
 "Loot",
 "Spawn",
 "Treasure",
+"Food",
 "Investigate"
 );
 
@@ -11279,7 +11307,8 @@ var noncreatureMediumTriggers = new Array(
 "Everyone lose life",
 "Look at top Reveal Type",
 "Bolster",
-"Support"
+"Support",
+"Amass 2"
 );
 
 var noncreatureHighTriggers = new Array(
@@ -11326,6 +11355,7 @@ var creatureMythicScars = new Array("Indestructible",
 "Annihilator",
 "Miracle",
 "Soulbond",
+"Companion", 
 "Mythic Transform"
 )
 
@@ -11682,7 +11712,8 @@ var spellCommon = new Array(
 "Flashback",
 "Mana cost reduction",
 "SpliceArcane",
-"Surge"
+"Surge", 
+"Addendum"
 );
 
 var libraryCommon = new Array(
@@ -11724,6 +11755,7 @@ var lifeCommon = new Array(
 var makingCommon = new Array(
 "Spawn",
 "Treasure",
+"Food",
 "Manifest the top card of your library."
 );
 
@@ -11777,7 +11809,8 @@ var spellRare  = new Array(
 "Split Second",
 "Cipher",
 "Recover",
-"Madness"
+"Madness",
+"Spectacle"
 );
 
 var libraryRare  = new Array(
@@ -13401,7 +13434,13 @@ function scar()
 	   var d2 = Math.floor((Math.random()*2)+1);
 	   lowTrigger = "Create ".concat((d2 ).toString()).concat(" Treasure tokens with \"T, Sac: Add 1 mana of any color\".");
 
-	}
+  }
+  //Food
+  if (lowTrigger == "Food")
+  {
+    var d2 = Math.floor((Math.random()*2)+1);
+	  lowTrigger = "Create ".concat((d2 ).toString()).concat(" Food tokens with \"T, Sac: Gain 3 life\".");
+  }
 	//Destroy Artifact
 	if (mediumTrigger == "Destroy Artifact")
 	{
@@ -15535,6 +15574,195 @@ function scar()
        scarlink.innerHTML= "Click this link to see what it aftermaths to!";
        scarlink.href = linktext;
        scarlink.target = "_blank";
+  }
+
+  //Adapt
+  if (scar.innerHTML == "Adapt")
+  {
+    var d4 = Math.floor((Math.random()*4)+1);
+    var cost = d4 - (Math.floor((Math.random()*3))-1);
+    scar.innerHTML = "Mana cost ".concat(cost).concat(": Adapt ").concat(d4).concat(".");
+  }
+
+  //Afterlife
+  if (scar.innerHTML == "Afterlife")
+  {
+    var d2 = Math.floor((Math.random()*2)+2);
+    scar.innerHTML = "Afterlife ".concat(d2);
+  }
+
+  //Spectacle
+  if (scar.innerHTML == "Spectacle")
+  {
+    var d4 = Math.floor((Math.random()*3)+1);
+    if (d4 == 4)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
+		  scar.innerHTML = "Spectacle: mana cost +1, ".concat(highTrigger);
+    }
+    else if (d4 == 3)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
+      scar.innerHTML = "Spectacle: mana cost -".concat(d4).concat(", ").concat(lowTrigger);
+    }
+    else
+      scar.innerHTML = "Spectacle: mana cost -".concat(d4)
+  }
+
+  //Addendum
+  if (scar.innerHTML == "Addendum")
+  {
+    var d10 = Math.floor((Math.random()*10)+1);
+    if (d10 <= 5)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a low powered trigger.")
+		  scar.innerHTML = "Addendum: ".concat(lowTrigger);
+    }
+    else if (d10 > 5 && d10 != 10)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a medium powered trigger.")
+		  scar.innerHTML = "Addendum: ".concat(mediumTrigger);
+    }
+    else
+    {
+      type.innerHTML = type.innerHTML.concat(" With a high powered trigger!")
+		  scar.innerHTML = "Addendum: ".concat(highTrigger);
+    }
+  }
+
+  //Adventure
+  if (scar.innerHTML == "Adventure")
+  {
+    var d5 = Math.floor((Math.random()*5)+1);
+    
+    var color;
+    if (d5 == 1)
+      color = "W";
+    else if (d5 == 2)
+      color = "U";
+    else if (d5 == 3)
+      color = "B";
+    else if (d5 == 4)
+      color = "R";
+    else
+      color = "G";
+
+    var advTypeGen = Math.floor((Math.random()*2)+1);
+    var adventureType;
+    if (advTypeGen == 1)
+      adventureType = "Instant";
+    else
+      adventureType = "Sorcery";
+
+
+    var d3 = Math.floor((Math.random()*3)+1);
+    if (d3 == 1)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a low powered trigger.");
+      var d2 = Math.floor((Math.random()*2));
+      if (d2 == 0)
+      {
+        scar.innerHTML = "Adventure (".concat(adventureType).concat(") ").concat(color).concat(": ").concat(lowTrigger);
+      }
+      else
+      {
+        scar.innerHTML = "Adventure (".concat(adventureType).concat(") ").concat(d2).concat(color).concat(": ").concat(lowTrigger);
+      }
+    }
+    else if (d3 == 2)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a medium powered trigger.");
+      var d2 = Math.floor((Math.random()*2)+1);
+      scar.innerHTML = "Adventure (".concat(adventureType).concat(") ").concat(d2).concat(color).concat(": ").concat(mediumTrigger);
+    }
+    else if (d3 == 3)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a high powered trigger!");
+      var d2 = Math.floor((Math.random()*2)+2);
+      scar.innerHTML = "Adventure (".concat(adventureType).concat(") ").concat(d2).concat(color).concat(": ").concat(highTrigger);
+    }
+  }
+
+  //Escape
+  if (scar.innerHTML == "Escape")
+  {
+    var exile = Math.floor((Math.random()*6)+3);
+    var d4 = Math.floor((Math.random()*4)+1);
+    if (d4 == 4 || exile >= 6)
+    {
+      if (exile == 8)
+      {
+        type.innerHTML = type.innerHTML.concat(" With a high powered trigger!");
+        scar.innerHTML ="Mana cost +".concat(d4).concat(", exile ").concat(exile).concat(" other cards from your graveyard: Escape, ").concat(highTrigger);
+      }
+      else
+      {
+        type.innerHTML = type.innerHTML.concat(" With a medium powered trigger.");
+        scar.innerHTML ="Mana cost +".concat(d4).concat(", exile ").concat(exile).concat(" other cards from your graveyard: Escape, ").concat(mediumTrigger);
+      }
+    }
+    else
+    {
+      scar.innerHTML ="Mana cost +".concat(d4).concat(", exile ").concat(exile).concat(" other cards from your graveyard: Escape");
+    }
+  }
+
+  //Companion
+  if (scar.innerHTML == "Companion")
+  {
+    var deckRestrictions = new Array (
+      "No even costed cards in your deck (except lands)",
+      "No odd costed cards in your deck",
+      "Only scarred cards in your deck (except for basic lands)",
+      "Only unscarred cards in your deck (except this)",
+      "Only cards with cmc 3 or less in your deck (except this)",
+      "Only cards with cmc 2 or less in your deck (except this)",
+      "Only cards with cmc 4 or more in your deck (except this)",
+      "Only cards with cmc 5 or more in your deck (except this)",
+      "+10 deck size minimum",
+      "+20 deck size minimum",
+      "Only cards that share color identity with this in your deck",
+      "No artifacts or enchantments in your deck",
+      "No instants or sorceries in your deck",
+      "No multicolored cards in your deck (except this)",
+      "Start the game with 10 life",
+      "Start the game only drawing 4 cards",
+      "Only cards with activated abilities in your deck (except this)",
+      "No cards with activated abilities in your deck (except this)",
+      "Only cards with 2 or less toughness in your deck (except this)",
+      "Only cards with 1 or less toughness in your deck (except this)",
+      "Only cards with 4 or more toughness in your deck (except this)",
+      "Only cards with 5 or more toughness in your deck (except this)",
+      "Only cards with 2 or less power in your deck (except this)",
+      "Only cards with 1 or less power in your deck (except this)",
+      "Only cards with 4 or more power in your deck (except this)",
+      "Only cards with 5 or more power in your deck (except this)",
+      "Only basic lands in your deck are Wastes",
+      "No sideboarding, this card must be your Companion in the first game of a set",
+      "No legendary cards in your deck (except this)"
+    );
+    var chosenRestriction = Math.floor((Math.random()*deckRestrictions.length));
+    scar.innerHTML = "Companion - ".concat(deckRestrictions[chosenRestriction]).concat(".");
+  }
+
+  //Mutate
+  if (scar.innerHTML == "Mutate")
+  {
+    var d4 = Math.floor((Math.random()*4)+1);
+    var d3 = Math.floor((Math.random()*3)+1);
+    scar.innerHTML = "Mana cost +".concat(d3);
+    if (d4 == 4)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a high powered trigger!");
+      scar.innerHTML = scar.innerHTML.concat("; When this mutates, ").concat(mediumTrigger);
+    }
+    else if (d4 > 1)
+    {
+      type.innerHTML = type.innerHTML.concat(" With a medium powered trigger.");
+      scar.innerHTML = scar.innerHTML.concat("; When this mutates, ").concat(highTrigger);
+    }
+    else
+    scar.innerHTML = scar.innerHTML.concat(".");
   }
 
 	//Common Transform
