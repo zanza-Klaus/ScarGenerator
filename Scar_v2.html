@@ -10659,6 +10659,7 @@ var creatureAbilities = new Array("+1/+1",
 "&quot;Whenever this creature attacks and isn't blocked, defending player discards a card.&quot;",
 "&quot;Whenever this creature attacks and isn't blocked, loot 1.&quot;",
 "&quot;Whenever this creature attacks, scry 1.&quot;",
+"&quot;Whenever this creature attacks, surveil 1.&quot;",
 "&quot;Whenever this creature attacks, bolster 1.&quot;",
 "&quot;Whenever this creature attacks, support 1.&quot;",
 "Prowess",
@@ -11206,6 +11207,7 @@ var noncreatureActivatedAbilities = new Array(
 var creatureLowTriggers = new Array(
 "Gain",
 "Scry",
+"Surveil",
 "Self +X/+X until EoT",
 "Self gains",
 "Target +X/+X until EoT",
@@ -11224,6 +11226,7 @@ var creatureLowTriggers = new Array(
 var creatureMediumTriggers = new Array(
 "Draw a card",
 "Spawn",
+"Explore",
 "Destroy Artifact",
 "Destroy Enchantment",
 "Everyone sacs",
@@ -11280,6 +11283,7 @@ var creatureHighTriggers = new Array(
 var noncreatureLowTriggers = new Array(
 "Gain",
 "Scry",
+"Surveil",
 "Target +X/+X until EoT",
 "Target ability until EoT",
 "Look at top X",
@@ -11614,6 +11618,7 @@ var nonCreatureCommonScars = new Array("Arrival",
 );
 var nonCreatureUncommonScars = new Array(
 "Tap Scry",
+"Tap Surveil",
 "Tap Gain",
 "Morph",
 "Mana cost reduction",
@@ -11726,6 +11731,7 @@ var spellCommon = new Array(
 
 var libraryCommon = new Array(
 "Scry",
+"Surveil",
 "Reorder",
 "Investigate"
 );
@@ -11818,7 +11824,8 @@ var spellRare  = new Array(
 "Cipher",
 "Recover",
 "Madness",
-"Spectacle"
+"Spectacle",
+"Undergrowth"
 );
 
 var libraryRare  = new Array(
@@ -13309,6 +13316,14 @@ function scar()
 	   var d2 = Math.floor((Math.random()*2)+1);
 	   lowTrigger = "scry ".concat(d2.toString()).concat(".");
 	}
+
+  //Surveil
+	if (lowTrigger == "Surveil")
+	{
+	   var d2 = Math.floor((Math.random()*2)+1);
+	   lowTrigger = "surveil ".concat(d2.toString()).concat(".");
+	}
+  
 	//Investigate
 	if (lowTrigger == "Investigate")
 	{
@@ -13405,6 +13420,7 @@ function scar()
 	{
 	   mediumTrigger = "draw a card.";
 	}
+  
 
 	//Scion
 	if (highTrigger== "Scion")
@@ -13732,6 +13748,12 @@ function scar()
 	   var d2 = Math.floor((Math.random()*2)+1);
 	   lowCreatureTrigger = "scry ".concat(d2.toString()).concat(".");
 	}
+  //Surveil
+	if (lowCreatureTrigger == "Surveil")
+	{
+	   var d2 = Math.floor((Math.random()*2)+1);
+	   lowCreatureTrigger = "surveil ".concat(d2.toString()).concat(".");
+	}
 	//Investigate
 	if (lowCreatureTrigger == "Investigate")
 	{
@@ -13828,6 +13850,11 @@ function scar()
 	{
 	   mediumCreatureTrigger = "draw a card.";
 	}
+  //Explore
+  if (mediumCreatureTrigger == "Explore")
+  {
+    mediumCreatureTrigger = "this explores."
+  }
 	//Scion
 	if (highCreatureTrigger== "Scion")
 	{
@@ -13835,6 +13862,7 @@ function scar()
 	   highCreatureTrigger = "scion ".concat((d2).toString()).concat(".");
 
 	}
+  
 	//Spawn
 	if (mediumCreatureTrigger== "Spawn")
 	{
@@ -14339,6 +14367,11 @@ function scar()
 	   var d2 = Math.floor((Math.random()*2)+1);
 	   scar.innerHTML = "Scry ".concat(d2.toString());
 	}
+  if (scar.innerHTML == "Surveil")
+	{
+	   var d2 = Math.floor((Math.random()*2)+1);
+	   scar.innerHTML = "surveil ".concat(d2.toString());
+	}
 	if (scar.innerHTML == "Scavenge")
 	{
 	   var d4 = Math.floor((Math.random()*4)+1);
@@ -14417,6 +14450,11 @@ function scar()
 	if (scar.innerHTML == "Tap Scry")
 	{
 		scar.innerHTML = "Tap this permanent: Scry 1.";
+
+	}
+  if (scar.innerHTML == "Tap Surveil")
+	{
+		scar.innerHTML = "Tap this permanent: Surveil 1.";
 
 	}
 	if (scar.innerHTML == "Tap Gain")
@@ -15773,6 +15811,31 @@ function scar()
     }
     else
     scar.innerHTML = scar.innerHTML.concat(".");
+  }
+
+  /*//Ascend
+  if (scar.innerHTML == "Ascend")
+  {
+    var d10 = Math.floor((Math.random()*10)+1);
+    if (d10 >= 9)
+    {
+
+    }
+    else if (d10 >= 6)
+    {
+
+    }
+    else
+    {
+
+    }
+  }*/
+
+  //Undergrowth
+  if (scar.innerHTML == "Undergrowth")
+  {
+    type.innerHTML = type.innerHTML.concat(" With a low powered trigger.");
+    scar.innerHTML = "Undergrowth: For each creature in your graveyard, ".concat(lowTrigger);
   }
 
 	//Common Transform
